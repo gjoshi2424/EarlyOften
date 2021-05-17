@@ -4,7 +4,7 @@ Compiler Methods: https://github.com/thomaswp/ProgSnap2Analysis
 
 Early/Often Equation: https://users.csc.calpoly.edu/~ayaank/pubs/Kazerouni_A_D_2020.pdf
 
-Rquired Columns for main table:\n
+Rquired Columns for main table:<br/>
 -Subject ID
 -Order
 -EventType

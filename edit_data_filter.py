@@ -90,8 +90,9 @@ def load_main_table(read_dir, filter, min_edits, from_cache=True):
     #Crates a pandas data frame from MainTable csv
     main_table_df = pd.read_csv(os.path.join(read_dir, "MainTable.csv"))
     deadline_table_df = pd.read_csv(os.path.join(read_dir, "LinkTables/Deadline.csv"))
+    codestates_table_df = pd.read_csv(os.path.join(read_dir, "LinkTables/CodeStates.csv"))
     #filter is true by default
     main_table_df = format_times(main_table_df, deadline_table_df)
     if filter:
         main_table_df = filter_dataset(main_table_df, min_edits)
-    return main_table_df, deadline_table_df
+    return main_table_df, deadline_table_df, codestates_table_df

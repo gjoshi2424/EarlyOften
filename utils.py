@@ -75,14 +75,14 @@ def write_metric_map(name, metric_map, path):
         for subject_id, value in sorted(metric_map.items()):
             writer.writerow({"SubjectID": subject_id, name: value})
 
-def calculate_metric(main_table, metric_used):
+def calculate_metric(main_table, metric_used, codeState_table):
     out.info("Calculating early and often metric")
     list_of_subjects = set(main_table["SubjectID"])
     map_score = {}
     dropped_metrics = 0
     for subject in list_of_subjects:
         current_events = main_table[main_table["SubjectID"] == subject]
-        current_metric = metric_used(current_events)
+        current_metric = metric_used(current_events, codeState_table)
         if current_metric == 0:
             dropped_metrics += 1
             continue

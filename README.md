@@ -1,6 +1,10 @@
 # EarlyOften
 
+Previous studies have shown that undergraduate students who work on their assignments earlier and more often tend to do better in the respective course. By keeping track of the size of each edit and the day (respective to the deadline) an edit was made, this code calculates the ealy/often metric (specified in the link below). In this metric, students with a higher score are those who worked on their assignments more often and earlier compared to other students. The data used to calculate this metric follows the ProgSnap 2 specification (linked below). <br/>
+
 Early/Often Equation: https://users.csc.calpoly.edu/~ayaank/pubs/quantifying-incremental-development-procrastination.pdf <br/>
+ProgSnap 2 Specification: https://cssplice.github.io/progsnap2/<br/>
+
 -Please title main folder w/ data "Data" (will change later) <br/>
 
 Files Needed:<br/>

@@ -13,7 +13,7 @@ Required Columns:<br/>
 5.AssignmentID<br/>
 6.ParentEventID<br/>
 7.EditType (For edit events only)<br/> <br/>
--Files in LinkTable folder<br/>
+-Files in LinkTable folder:<br/>
 -CodeStates.csv<br/>
 -Required columns: <br/>
 1.CodeStateID<br/>
@@ -21,7 +21,7 @@ Required Columns:<br/>
 -Deadline.csv<br/>
 -Required Columns:<br/>
 1.AssignmentID <br/>
-2.X-Deadline <br/><br/><br/>
+2.X-Deadline <br/><br/>
 
 How to run program: <br/>
 In terminal: python3 eo.py<br>

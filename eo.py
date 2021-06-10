@@ -14,8 +14,6 @@ def calculate_eo(session_table, codeState_table):
     edits = session_table[session_table["EventType"] == "File.Edit"]
     sum = 0
     #Going to be used to calculate diff in lines
-    more_lines = []
-    less_lines = []
     size_of_edit = 0
     #size(e) * daysToDeadline
     top_of_eq = 0
@@ -36,6 +34,8 @@ def calculate_eo(session_table, codeState_table):
 
 def calculate_line_difference(current_code, next_code):
     diff_size = 0
+    more_lines = []
+    less_lines = []
     current_lines = [line for line in current_code.split('\n') if line.strip() != '']
     next_lines = [line for line in next_code.split('\n') if line.strip() != '']
     current_length = len(current_lines)
@@ -90,7 +90,7 @@ if __name__ == "__main__":
     checker3 = utils.check_attributes(codestates_table_df, ["CodeStateID", "Code"])
     
     
-    if checker:
+    if checker and (checker2 and checker3):
         eo_map = utils.calculate_metric(main_table_df, calculate_eo, codestates_table_df)
         out.info(eo_map)
         utils.write_metric_map("EarlyandOften", eo_map, write_path)

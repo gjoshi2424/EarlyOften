@@ -1,20 +1,11 @@
 
 import pandas as pd
-import numpy as np
 import datetime
-import sys
 import os
-import csv
-import pathlib
-import utils
 import logging
 import re
 
 #This is used for deriving independent session ids
-GAP_TIME = 1200
-MIN_SESSIONS_Z = -2
-#Temporary
-MIN_EDITS = 2
 DATE_FORMAT = '%Y-%m-%dT%H:%M:%S'
 
 CACHE_VERSION = '2019.08.28.A'
@@ -24,14 +15,6 @@ out = logging.getLogger()
 
 
 def get_valid_filename(s):
-    """
-    Return the given string converted to a string that can be used for a clean
-    filename. Remove leading and trailing spaces; convert other spaces to
-    underscores; and remove anything that is not an alphanumeric, dash,
-    underscore, or dot.
-    >>> get_valid_filename("john's portrait in 2004.jpg")
-    'johns_portrait_in_2004.jpg'
-    """
     s = str(s).strip().replace(' ', '_')
     return re.sub(r'(?u)[^-\w.]', '', s)
 

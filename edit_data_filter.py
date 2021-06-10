@@ -68,8 +68,6 @@ def filter_dataset(main_table_df, min_edits):
     list_of_subjects = set(main_table_df["SubjectID"])
     for subject in list_of_subjects:
         check = main_table_df[main_table_df["SubjectID"] == subject]
-        #print(len(check))
-        #print(min_edits)
         if len(check) < min_edits:
             subjects_removed += 1
             main_table_df = main_table_df[main_table_df["SubjectID"] != subject]

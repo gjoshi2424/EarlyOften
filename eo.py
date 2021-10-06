@@ -2,6 +2,7 @@ import pandas as pd
 import sys
 import os
 import utils
+import git_format
 import edit_data_filter
 import logging
 import difflib
@@ -58,10 +59,17 @@ if __name__ == "__main__":
     read_path = "./data"
     write_path = "./out/EO.csv"
 
-    if len(sys.argv) > 1:
-        read_path = sys.argv[1]
-    if len(sys.argv) > 2:
-        write_path = sys.argv[2]
+    if len(sys.argv) >= 3 and sys.argv[1] == '-g':
+        repo = sys.argv[2]
+        if len(sys.argv) == 4:
+            write_path = sys.argv[4]
+        read_path = git_format.check(repo)
+
+    else:
+        if len(sys.argv) > 1:
+            read_path = sys.argv[1]
+        if len(sys.argv) > 2:
+            write_path = sys.argv[2]
     while True:
         filter_data = str(input("Would you like to filter data (Y/N): "))
         if(filter_data == "Y" or filter_data == "N"):

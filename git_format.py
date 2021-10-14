@@ -1,20 +1,21 @@
-from pydriller import Repository
-from git import Repo
-import glob
+import pydriller 
+import datetime
 
-#gjoshi2424/test_data
+def run_repo(end_date, repo_path):
+    user_date = end_date
+    repo_name = repo_path
+    year, month, day = map(int, user_date.split('-'))
+    deadline = datetime.date(year,month, day)
+    total_size_deadline = 0
+    total_size = 0
+    for commit in pydriller.Repository(repo_name).traverse_commits():
+        comm_date = commit.committer_date.date()
+        days_to_deadline = (deadline-comm_date).days
+        size_of_edit = 0
+        for modification in commit.modified_files:
+            size_of_edit += modification.added_lines
+            size_of_edit += modification.deleted_lines
+        total_size_deadline += (size_of_edit * days_to_deadline)
+        total_size += size_of_edit
 
-def check(repo_path):
-    linkTable_files = []
-    main_file = []
-    Repo.clone_from("https://github.com/" + repo_path + '.git', './temp')
-    for filename in glob.iglob('./temp/Data/LinkTables/**/*.csv', recursive = True):
-        linkTable_files.append(filename)
-    for filename in glob.iglob('./temp/Data/MainTable.csv', recursive = True):
-        main_file.append(filename)
-    #Check for errors
-    if len(linkTable_files) < 2 or len(main_file) != 1:
-        raise Exception("Format not valid")
-    
-    read_path = './temp/Data/'
-    return read_path
+    print("EO value: " + str(total_size_deadline/total_size))

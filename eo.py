@@ -56,50 +56,50 @@ def calculate_line_difference(current_code, next_code):
     return diff_size
 
 if __name__ == "__main__":
-    read_path = "./data"
-    write_path = "./out/EO.csv"
-
-    if len(sys.argv) >= 3 and sys.argv[1] == '-g':
-        repo = sys.argv[2]
-        if len(sys.argv) == 4:
-            write_path = sys.argv[4]
-        read_path = git_format.check(repo)
-
+    if(len(sys.argv) == 4 and sys.argv[1] == "-g"):
+        write_path = "./out/EO_git.csv"
+        user_date = sys.argv[3]
+        repo_path = sys.argv[2]
+        git_format.run_repo(user_date, repo_path)
+        
+    
     else:
+        read_path = "./data"
+        write_path = "./out/EO.csv"
         if len(sys.argv) > 1:
             read_path = sys.argv[1]
         if len(sys.argv) > 2:
             write_path = sys.argv[2]
-    while True:
-        filter_data = str(input("Would you like to filter data (Y/N): "))
-        if(filter_data == "Y" or filter_data == "N"):
-            break
-        else:
-            print("Enter valid input (Y/N)")
-            continue
-    data_filter = False
-    min_edits = 0
-    if(filter_data == "Y"):
-        data_filter = True
         while True:
-            try:
-                min_edits = int(input("Enter minimum number of edits required for each subject (positive integer): "))
-                if min_edits >= 1:
-                    break
-                else:
-                    print("Please enter a positive integer")
-            except ValueError:
-                print("Give a positive integer")
+            filter_data = str(input("Would you like to filter data (Y/N): "))
+            if(filter_data == "Y" or filter_data == "N"):
+                break
+            else:
+                print("Enter valid input (Y/N)")
                 continue
+        data_filter = False
+        min_edits = 0
+        if(filter_data == "Y"):
+            data_filter = True
+            while True:
+                try:
+                    min_edits = int(input("Enter minimum number of edits required for each subject (positive integer): "))
+                    if min_edits >= 1:
+                        break
+                    else:
+                        print("Please enter a positive integer")
+                except ValueError:
+                    print("Give a positive integer")
+                    continue
 
-    main_table_df, deadline_table_df, codestates_table_df = edit_data_filter.load_main_table(read_path, data_filter, min_edits)
-    checker = utils.check_attributes(main_table_df, ["SubjectID", "Order", "EventType", "AssignmentID", "ParentEventID", "EditType"])
-    checker2 = utils.check_attributes(deadline_table_df, ["AssignmentID", "X-Deadline"])
-    checker3 = utils.check_attributes(codestates_table_df, ["CodeStateID", "Code"])
-    
-    
-    if checker and (checker2 and checker3):
-        eo_map = utils.calculate_metric(main_table_df, calculate_eo, codestates_table_df)
-        out.info(eo_map)
-        utils.write_metric_map("EarlyandOften", eo_map, write_path)
+        main_table_df, deadline_table_df, codestates_table_df = edit_data_filter.load_main_table(read_path, data_filter, min_edits)
+        checker = utils.check_attributes(main_table_df, ["SubjectID", "Order", "EventType", "AssignmentID", "ParentEventID", "EditType"])
+        checker2 = utils.check_attributes(deadline_table_df, ["AssignmentID", "X-Deadline"])
+        checker3 = utils.check_attributes(codestates_table_df, ["CodeStateID", "Code"])
+        
+        
+        if checker and (checker2 and checker3):
+            eo_map = utils.calculate_metric(main_table_df, calculate_eo, codestates_table_df)
+            out.info(eo_map)
+            utils.write_metric_map("EarlyandOften", eo_map, write_path)
     

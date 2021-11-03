@@ -52,6 +52,10 @@ def write_metric_map(name, metric_map, path):
         for subject_id, value in sorted(metric_map.items()):
             writer.writerow({"SubjectID": subject_id, name: value})
 
+def write_git_metrics(name, metric_map, path):
+    pathlib.Path(path).parent.mkdir(parents=True, exist_ok=True)
+    metric_map.to_csv(path, encoding='utf-8', index=False, sep=' ')
+
 def calculate_metric(main_table, metric_used, codeState_table):
     out.info("Calculating early and often metric")
     list_of_subjects = set(main_table["SubjectID"])

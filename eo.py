@@ -56,11 +56,12 @@ def calculate_line_difference(current_code, next_code):
     return diff_size
 
 if __name__ == "__main__":
-    if(len(sys.argv) == 4 and sys.argv[1] == "-g"):
+    if(len(sys.argv) == 3 and sys.argv[1] == "-g"):
         write_path = "./out/EO_git.csv"
-        user_date = sys.argv[3]
-        repo_path = sys.argv[2]
-        git_format.run_repo(user_date, repo_path)
+        file_path = sys.argv[2]
+        git_metric = git_format.run_repos(file_path)
+        print(git_metric)
+        utils.write_git_metrics("EarlyandOften", git_metric, write_path)
         
     
     else:

@@ -6,7 +6,7 @@ import logging
 import re
 
 #This is used for deriving independent session ids
-DATE_FORMAT = '%Y-%m-%dT%H:%M:%S'
+DATE_FORMAT = '%Y-%m-%dT%H:%M:%S.%f'
 
 CACHE_VERSION = '2019.08.28.A'
 CACHE_TABLE_NAME = "MainTable_filtered_" + CACHE_VERSION + ".csv"
@@ -27,7 +27,7 @@ def get_cache_table_path(data_dir):
 def format_times(main_table_df, deadline_table_df):
     out.info("Formatting server and deadline timestamps")
     #Check for either servertimestamp, or client timestamp
-    for tsf in ["ServerTimestamp", "ClientTimestamp"]:
+    for tsf in ["ClientTimestamp", "ServerTimestamp"]:
         if tsf in main_table_df:
             timestamp_field = tsf
     if timestamp_field is None:
@@ -37,6 +37,7 @@ def format_times(main_table_df, deadline_table_df):
     for i in range(len(deadline_table_df)):
         deadlines.append(datetime.datetime.strptime(deadline_table_df["X-Deadline"].iloc[i], DATE_FORMAT))
     for i in range(len(main_table_df)):
+        #main_table_df[timestamp_field].iloc[i] = str(main_table_df[timestamp_field].iloc[i])
         timestamps.append(datetime.datetime.strptime(main_table_df[timestamp_field].iloc[i], DATE_FORMAT))
     deadline_table_df["X-Deadline"] = deadlines
     main_table_df["X-Timestamp"] = timestamps
@@ -71,7 +72,7 @@ def load_main_table(read_dir, filter, min_edits, from_cache=True):
     #Crates a pandas data frame from MainTable csv
     main_table_df = pd.read_csv(os.path.join(read_dir, "MainTable.csv"))
     deadline_table_df = pd.read_csv(os.path.join(read_dir, "LinkTables/Deadline.csv"))
-    codestates_table_df = pd.read_csv(os.path.join(read_dir, "LinkTables/CodeStates.csv"))
+    codestates_table_df = pd.read_csv(os.path.join(read_dir, "CodeStates/CodeStates.csv"))
     #filter is true by default
     main_table_df = format_times(main_table_df, deadline_table_df)
     if filter:

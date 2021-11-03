@@ -1,6 +1,6 @@
 # EarlyOften
 
-Previous studies have shown that undergraduate students who work on their coding assignments earlier and more often tend to do better in the respective course. By keeping track of the size of each edit and the day (respective to the deadline) an edit was made, this program calculates the ealy/often metric (specified in the link below). In this metric, students with a higher score are those who worked on their assignments more often and earlier compared to other students. The data used to calculate this metric follows the ProgSnap2 specification (linked below). <br/>
+By keeping track of the size of each edit and the day (respective to the deadline) an edit was made, this program calculates the ealy/often metric (specified in the link below). In this metric, students with a higher score are those who worked on their assignments more often and earlier compared to other students. The data used to calculate this metric follows the ProgSnap2 specification (linked below). <br/>
 
 Early/Often Paper: https://users.csc.calpoly.edu/~ayaank/pubs/quantifying-incremental-development-procrastination.pdf <br/>
 ProgSnap2 Specification: https://cssplice.github.io/progsnap2/<br/>
@@ -21,7 +21,7 @@ The default directory the program will read in is "Data" and the default write f
 Files Needed (in ProgSnap2 format):<br/><br/>
 -MainTable.csv: <br/>
 Required Columns:<br/>
-1.Subject ID<br/>
+1.SubjectID<br/>
 2.Order<br/>
 3.EventType<br/>
 4.EventID<br/>

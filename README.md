@@ -5,7 +5,7 @@ By keeping track of the size of each edit and the day (respective to the deadlin
 Early/Often Paper: https://users.csc.calpoly.edu/~ayaank/pubs/quantifying-incremental-development-procrastination.pdf <br/>
 ProgSnap2 Specification: https://cssplice.github.io/progsnap2/<br/>
 
-Python version: Python 3.8.2
+Python version: Python 3.8.2 <br/>
 Packages needed: pandas
 
 How to run program: <br/>
